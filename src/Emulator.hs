@@ -33,13 +33,13 @@ printAddress :: Emulator m => (String -> m ()) -> Address -> m ()
 printAddress op addr = load addr >>= disp addr
     where disp x y = op $ show x ++ " => " ++ show y
 
-printRange :: Emulator m => (String -> m ()) -> Word16 -> Word16 -> m ()
-printRange op a b = mapM (load . Word) [a..b] >>= op . unwords . map showHexWord
+printRange :: Emulator m => ([String] -> m ()) -> Word16 -> Word16 -> m ()
+printRange op a b = mapM (load . Word) [a..b] >>= op . map showHexWord
 
 printRegisters :: Emulator m => (String -> m ()) -> m ()
 printRegisters op = mapM load regAddr >>= 
                     op . init . unwords . zipWith (\x y -> show x ++ ": " ++ show y ++ ",") regAddr
-    where regAddr = map Register ([minBound..maxBound] :: [Register])
+    where regAddr = map Register $ enumFrom A
 
 loadProgram :: Emulator m => ByteString -> m () 
 loadProgram prog = lp prog 0 
@@ -64,7 +64,7 @@ loadAddress (OpRegisterNextWord w) =
         x <- load $ Register PC
         y <- load $ Word x
         z <- load $ Register w
-        return . Word $ z + y
+        return . Word $ y + z
 
 loadAddress OpPush                 =
     do
@@ -72,8 +72,8 @@ loadAddress OpPush                 =
         store (Register SP) $ x - 1
         return . Word $ x - 1
 
-loadAddress OpPeek            = liftM Word . load $ Register SP
-loadAddress OpPick            =
+loadAddress OpPeek                 = liftM Word . load $ Register SP
+loadAddress OpPick                 =
     do
         incrementPC
         x <- load $ Register PC
@@ -81,10 +81,10 @@ loadAddress OpPick            =
         z <- load $ Word x
         return . Word $ y + z
 
-loadAddress OpSP              = return $ Register SP
-loadAddress OpPC              = return $ Register PC
-loadAddress OpEX              = return $ Register EX
-loadAddress OpNextWordPointer =
+loadAddress OpSP                   = return $ Register SP
+loadAddress OpPC                   = return $ Register PC
+loadAddress OpEX                   = return $ Register EX
+loadAddress OpNextWordPointer      =
     do
         incrementPC
         x <- load $ Register PC
