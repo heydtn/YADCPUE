@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="window1">
+    <property name="resizable">False</property>
+    <child>
+      <object class="GtkHPaned" id="hpaned1">
+        <property name="sensitive">False</property>
+        <child>
+          <object class="GtkFixed" id="fixed2">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkFileChooserButton" id="getFile">
+                <property name="width_request">295</property>
+                <property name="height_request">29</property>
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="x">5</property>
+                <property name="y">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkTextView" id="disassembly">
+                <property name="width_request">293</property>
+                <property name="height_request">404</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="x">6</property>
+                <property name="y">40</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkHButtonBox" id="hbuttonbox1">
+                <property name="width_request">248</property>
+                <property name="height_request">32</property>
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkLabel" id="startButton">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Start (F6)</property>
+                    <attributes>
+                      <attribute name="foreground" value="#ffffffffffff"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="stepButton">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Step (F7)</property>
+                    <attributes>
+                      <attribute name="foreground" value="#ffffffffffff"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="resetButton">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Reset (F8)</property>
+                    <attributes>
+                      <attribute name="foreground" value="#ffffffffffff"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="x">49</property>
+                <property name="y">445</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="resize">False</property>
+            <property name="shrink">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFixed" id="fixed1">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkDrawingArea" id="displayWindow">
+                <property name="width_request">254</property>
+                <property name="height_request">254</property>
+                <property name="visible">True</property>
+                <property name="app_paintable">True</property>
+                <property name="events">GDK_FOCUS_CHANGE_MASK | GDK_STRUCTURE_MASK</property>
+              </object>
+              <packing>
+                <property name="x">53</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkDrawingArea" id="memoryDump">
+                <property name="width_request">354</property>
+                <property name="height_request">223</property>
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="y">254</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="resize">False</property>
+            <property name="shrink">False</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
